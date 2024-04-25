@@ -19,6 +19,7 @@ import { RegisterSchema } from "@/schema";
 import { Github } from "lucide-react";
 import { useFormStatus } from "react-dom";
 import { useState } from "react";
+import { handleGithubLogin } from "@/lib/action";
 
 const RegisterForm = () => {
   const [loading, setLoading] = useState(false);
@@ -114,9 +115,11 @@ const RegisterForm = () => {
         </form>
       </Form>
       <p className="my-2 text-muted-foreground text-center text-sm">or</p>
-      <Button className="w-full" size={"lg"} variant={"outline"}>
-        <Github className="mr-2 h-4 w-4" /> Continue with Github
-      </Button>
+      <form action={handleGithubLogin}>
+        <Button className="w-full" size={"lg"} variant={"outline"}>
+          <Github className="mr-2 h-4 w-4" /> Continue with Github
+        </Button>
+      </form>
     </CardWrapper>
   );
 };

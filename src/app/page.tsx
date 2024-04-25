@@ -1,15 +1,15 @@
 import { Button } from "@/components/ui/button";
-import { Mail, Trash } from "lucide-react";
+import { handleLogout } from "@/lib/action";
+import { auth } from "@/lib/auth";
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
+  console.log(session);
   return (
     <main className=" space-x-2 flex items-center justify-center h-screen">
-      <Button variant={"destructive"}>
-        <Trash className="mr-2 h-4 w-4" /> Delete this account
-      </Button>
-      <Button>
-        <Mail className="mr-2 h-4 w-4" /> Link with email
-      </Button>
+      <form action={handleLogout}>
+        <Button variant={"destructive"}>Logout</Button>
+      </form>
     </main>
   );
 }
