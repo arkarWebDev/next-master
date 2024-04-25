@@ -109,7 +109,7 @@ const RegisterForm = () => {
             ></FormField>
           </div>
           <Button size={"lg"} className="w-full" disabled={pending}>
-            {loading ? "Registering ..." : "Register"}
+            {loading ? "Requesting ..." : "Register"}
           </Button>
         </form>
       </Form>
