@@ -7,5 +7,5 @@ export const handleGithubLogin = async () => {
 };
 
 export const handleLogout = async () => {
-  await signOut;
+  await signOut();
 };
