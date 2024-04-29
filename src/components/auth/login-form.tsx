@@ -20,6 +20,7 @@ import { LoginSchema } from "@/schema";
 import { useFormStatus } from "react-dom";
 import { useState } from "react";
 import { Github } from "lucide-react";
+import { handleGithubLogin } from "@/lib/action";
 
 const LoginForm = () => {
   const [loading, setLoading] = useState(false);
@@ -89,9 +90,11 @@ const LoginForm = () => {
         </form>
       </Form>
       <p className="my-2 text-muted-foreground text-center text-sm">or</p>
-      <Button className="w-full" size={"lg"} variant={"outline"}>
-        <Github className="mr-2 h-4 w-4" /> Continue with Github
-      </Button>
+      <form action={handleGithubLogin}>
+        <Button className="w-full" size={"lg"} variant={"outline"}>
+          <Github className="mr-2 h-4 w-4" /> Continue with Github
+        </Button>
+      </form>
     </CardWrapper>
   );
 };

@@ -17,3 +17,7 @@ lesson 47
 ## #005
 
 lesson 48
+
+## #006
+
+lesson 50

@@ -30,7 +30,7 @@ const Navbar = async () => {
         </Link>
         <div className="ms-6">
           {links.map((link) => (
-            <NavLink path={link.path} label={link.label} />
+            <NavLink path={link.path} label={link.label} key={link.path} />
           ))}
         </div>
       </div>
