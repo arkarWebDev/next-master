@@ -19,10 +19,9 @@ import { RegisterSchema } from "@/schema";
 import { Github } from "lucide-react";
 import { useFormStatus } from "react-dom";
 import { useState } from "react";
-import { handleGithubLogin } from "@/lib/action";
+import { handleGithubLogin, registerHandler } from "@/lib/action";
 
 const RegisterForm = () => {
-  const [loading, setLoading] = useState(false);
   const form = useForm({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
@@ -34,8 +33,7 @@ const RegisterForm = () => {
   });
 
   const onSubmitHandler = (data: z.infer<typeof RegisterSchema>) => {
-    setLoading(true);
-    console.log(data);
+    registerHandler(data);
   };
 
   const { pending } = useFormStatus();
@@ -110,7 +108,7 @@ const RegisterForm = () => {
             ></FormField>
           </div>
           <Button size={"lg"} className="w-full" disabled={pending}>
-            {loading ? "Requesting ..." : "Register"}
+            {pending ? "Requesting ..." : "Register"}
           </Button>
         </form>
       </Form>

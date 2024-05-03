@@ -20,7 +20,7 @@ import { LoginSchema } from "@/schema";
 import { useFormStatus } from "react-dom";
 import { useState } from "react";
 import { Github } from "lucide-react";
-import { handleGithubLogin } from "@/lib/action";
+import { handleGithubLogin, loginHandler } from "@/lib/action";
 
 const LoginForm = () => {
   const [loading, setLoading] = useState(false);
@@ -37,7 +37,7 @@ const LoginForm = () => {
 
   const onSubmitHandler = (data: z.infer<typeof LoginSchema>) => {
     setLoading(true);
-    console.log(data);
+    loginHandler(data);
   };
 
   return (

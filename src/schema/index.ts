@@ -1,13 +1,30 @@
 import * as z from "zod";
+import { checkEmailExists, validateLoginData } from "./utils";
 
 export const RegisterSchema = z
   .object({
     name: z.string().min(1, {
       message: "Please enter your name first.",
     }),
-    email: z.string().email({
-      message: "Please enter a vaild email address.",
-    }),
+    email: z
+      .string()
+      .email({
+        message: "Please enter a vaild email address.",
+      })
+      .refine(
+        async (email) => {
+          const emailExists = await checkEmailExists(email);
+
+          if (emailExists) {
+            return false;
+          }
+
+          return true;
+        },
+        {
+          message: "Email already exists in record.",
+        }
+      ),
     password: z.string().min(6, {
       message: "Password must be at least 6 characcters long.",
     }),
@@ -20,11 +37,43 @@ export const RegisterSchema = z
     path: ["confirmPassword"],
   });
 
-export const LoginSchema = z.object({
-  email: z.string().email({
-    message: "Please enter a vaild email address.",
-  }),
-  password: z.string().min(6, {
-    message: "Password must be at least 6 characcters long.",
-  }),
-});
+export const LoginSchema = z
+  .object({
+    email: z
+      .string()
+      .email({
+        message: "Please enter a vaild email address.",
+      })
+      .refine(
+        async (email) => {
+          const emailExists = await checkEmailExists(email);
+
+          if (emailExists) {
+            return true;
+          }
+
+          return false;
+        },
+        {
+          message: "Email doesn't exists.",
+        }
+      ),
+    password: z.string().min(6, {
+      message: "Password must be at least 6 characcters long.",
+    }),
+  })
+  .refine(
+    async (data) => {
+      const isMatch = await validateLoginData(data.email, data.password);
+
+      if (isMatch) {
+        return true;
+      }
+
+      return false;
+    },
+    {
+      message: "Invaild login credentials.",
+      path: ["password"],
+    }
+  );

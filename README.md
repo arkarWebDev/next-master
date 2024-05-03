@@ -21,3 +21,7 @@ lesson 48
 ## #006
 
 lesson 50
+
+## #007
+
+lesson 51 to 52

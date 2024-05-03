@@ -24,7 +24,7 @@ const Profile = async () => {
           <Avatar>
             <AvatarImage src={session?.user?.image as string} />
             <AvatarFallback>
-              {session?.user && session.user.name}
+              {session?.user && session.user.name?.substring(0, 1)}
             </AvatarFallback>
           </Avatar>
 
