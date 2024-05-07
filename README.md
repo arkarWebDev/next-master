@@ -55,8 +55,16 @@ lesson 53
 | name         | path                          | prefer                       |
 | ------------ | ----------------------------- | ---------------------------- |
 | Home         | /                             | show topics and posts        |
+| Topic Create | /topics/new                   | create topic                 |
 | Topic        | /topics/[slug]                | one topic and many posts     |
 | Create Post  | /topics/[slug]/posts/new      | create post                  |
 | Post Details | /topics/[slug]/posts/[postId] | one post and comments        |
 | About        | /about                        | tell about our site          |
 | FAQ          | /faq                          | frequency asks and questions |
+
+## #009
+
+lesson 54 to 55
+
+- 54 route setup
+- 55 topic form

@@ -77,3 +77,25 @@ export const LoginSchema = z
       path: ["password"],
     }
   );
+
+export const TopicSchema = z.object({
+  name: z
+    .string()
+    .min(3, {
+      message: "Topic name must be at least 3 characcters long.",
+    })
+    .refine((value) => !/\s/.test(value), {
+      message: "Topic name must not contain spaces.",
+    }),
+  image: z
+    .string()
+    .regex(/^https:\/\//, 'The URL must start with "https://"')
+    .url({ message: "Invalid URL" })
+    .refine((value) => /\.(jpg|jpeg|png|gif)$/i.test(value), {
+      message:
+        "The URL must be a link to an image file (.jpg, .jpeg, .png, .gif)",
+    }),
+  description: z.string().min(20, {
+    message: "Topic description must be at least 20 characcters long.",
+  }),
+});

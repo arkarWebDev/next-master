@@ -15,8 +15,8 @@ const links = [
     label: "Change logs",
   },
   {
-    path: "/events",
-    label: "Events",
+    path: "/about",
+    label: "About",
   },
 ];
 
