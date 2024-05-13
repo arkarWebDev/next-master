@@ -85,3 +85,11 @@ model Authenticator {
  
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
+model Topic {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  name        String 
+  description String
+  image       String?
+  creator     String
+}

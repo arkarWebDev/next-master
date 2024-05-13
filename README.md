@@ -68,3 +68,9 @@ lesson 54 to 55
 
 - 54 route setup
 - 55 topic form
+
+## #010
+
+lesson 56
+
+- 56 record to db

@@ -20,6 +20,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { TopicSchema } from "@/schema";
 import { useFormStatus } from "react-dom";
 import { useState } from "react";
+import { createTopicHandler } from "@/lib/action";
+import { toast } from "sonner";
 
 const CreateTopic = () => {
   const [loading, setLoading] = useState(false);
@@ -35,8 +37,18 @@ const CreateTopic = () => {
     },
   });
 
-  const onSubmitHandler = (data: z.infer<typeof TopicSchema>) => {
-    console.log(data);
+  const onSubmitHandler = async (data: z.infer<typeof TopicSchema>) => {
+    setLoading(true);
+    try {
+      await createTopicHandler(data);
+      setLoading(false);
+    } catch (error: unknown) {
+      toast("Something went wrong.", {
+        description: "Please try again later.",
+      });
+      console.log(error);
+    }
+    setLoading(false);
   };
   return (
     <section>
@@ -93,7 +105,7 @@ const CreateTopic = () => {
                 )}
               ></FormField>
             </div>
-            <Button size={"lg"} className="w-full" disabled={pending}>
+            <Button size={"lg"} className="w-full" disabled={loading}>
               {loading ? "Requesting ..." : "Create Topic"}
             </Button>
           </form>
