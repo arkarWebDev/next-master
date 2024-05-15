@@ -56,7 +56,7 @@ lesson 53
 | ------------ | ----------------------------- | ---------------------------- |
 | Home         | /                             | show topics and posts        |
 | Topic Create | /topics/new                   | create topic                 |
-| Topic        | /topics/[slug]                | one topic and many posts     |
+| Topic        | /topics/[topicId]             | one topic and many posts     |
 | Create Post  | /topics/[slug]/posts/new      | create post                  |
 | Post Details | /topics/[slug]/posts/[postId] | one post and comments        |
 | About        | /about                        | tell about our site          |
@@ -74,3 +74,11 @@ lesson 54 to 55
 lesson 56
 
 - 56 record to db
+
+## #011
+
+lesson 57 to 59
+
+- 57 show topic list
+- 58 single topic
+- 59 create post form

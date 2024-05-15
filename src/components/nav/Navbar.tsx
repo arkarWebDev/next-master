@@ -23,7 +23,7 @@ const links = [
 const Navbar = async () => {
   const session = await auth();
   return (
-    <nav className="w-2/3 mx-auto flex items-center py-4 border-b justify-between">
+    <nav className="w-1/2 mx-auto flex items-center py-4 border-b justify-between">
       <div className="flex items-center">
         <Link href={"/"} className="text-3xl font-bold">
           M-BLOG

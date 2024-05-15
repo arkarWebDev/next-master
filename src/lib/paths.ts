@@ -5,8 +5,8 @@ const paths = {
   CreateTopic() {
     return "/topics";
   },
-  SingleTopic(slug: string) {
-    return `/topics/${slug}`;
+  SingleTopic(topicId: string) {
+    return `/topics/${topicId}`;
   },
   CreatePost(slug: string) {
     return `/topics/${slug}/posts/new`;

@@ -99,3 +99,12 @@ export const TopicSchema = z.object({
     message: "Topic description must be at least 20 characcters long.",
   }),
 });
+
+export const PostSchema = z.object({
+  title: z.string().min(3, {
+    message: "Post title must be at least 3 characcters long.",
+  }),
+  description: z.string().min(20, {
+    message: "Post description must be at least 20 characcters long.",
+  }),
+});
