@@ -2,11 +2,12 @@
 import * as z from "zod";
 import bcrypt from "bcryptjs";
 
-import { LoginSchema, RegisterSchema, TopicSchema } from "@/schema";
+import { LoginSchema, PostSchema, RegisterSchema, TopicSchema } from "@/schema";
 import { auth, signIn, signOut } from "./auth";
 import { db } from "@/db";
 import { redirect } from "next/navigation";
 import paths from "@/lib/paths";
+import { Post, Topic } from "@prisma/client";
 
 export const handleGithubLogin = async () => {
   await signIn("github");
@@ -50,8 +51,10 @@ export const createTopicHandler = async (
     throw new Error("Invaild login credentials");
   }
 
+  let topic: Topic;
+
   try {
-    await db.topic.create({
+    topic = await db.topic.create({
       data: {
         name,
         image,
@@ -65,5 +68,35 @@ export const createTopicHandler = async (
     throw new Error("Something went wrong.");
   }
 
-  redirect(paths.SingleTopic(name));
+  redirect(paths.SingleTopic(topic.id));
+};
+
+export const createPostHandler = async (data: z.infer<typeof PostSchema>) => {
+  const session = await auth();
+  const validateData = await PostSchema.parseAsync(data);
+
+  const { title, content, topicId } = validateData;
+
+  if (!session?.user) {
+    throw new Error("Invaild login credentials");
+  }
+
+  let post: Post;
+
+  try {
+    post = await db.post.create({
+      data: {
+        title,
+        content,
+        topicId,
+        userId: session.user.id as string,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+
+    throw new Error("Something went wrong.");
+  }
+
+  redirect(paths.SinglePost(topicId, post.id));
 };

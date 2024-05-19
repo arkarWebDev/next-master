@@ -19,6 +19,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 import * as z from "zod";
 import { useState } from "react";
+import { createPostHandler } from "@/lib/action";
 
 interface CreatePostProps {
   params: {
@@ -33,13 +34,14 @@ const CreatePost = ({ params }: CreatePostProps) => {
     resolver: zodResolver(PostSchema),
     defaultValues: {
       title: "",
-      description: "",
+      content: "",
+      topicId: topicId,
     },
   });
 
   const onSubmitHandler = async (data: z.infer<typeof PostSchema>) => {
     setLoading(true);
-    console.log(data);
+    await createPostHandler(data);
   };
 
   return (
@@ -56,6 +58,18 @@ const CreatePost = ({ params }: CreatePostProps) => {
             <div className="space-y-4">
               <FormField
                 control={form.control}
+                name="topicId"
+                render={({ field }) => (
+                  <FormItem hidden>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              ></FormField>
+              <FormField
+                control={form.control}
                 name="title"
                 render={({ field }) => (
                   <FormItem>
@@ -69,7 +83,7 @@ const CreatePost = ({ params }: CreatePostProps) => {
               ></FormField>
               <FormField
                 control={form.control}
-                name="description"
+                name="content"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Description</FormLabel>
@@ -85,7 +99,7 @@ const CreatePost = ({ params }: CreatePostProps) => {
               ></FormField>
             </div>
             <Button size={"lg"} className="w-full" disabled={loading}>
-              {loading ? "Requesting ..." : "Create Topic"}
+              {loading ? "Requesting ..." : "Create Post"}
             </Button>
           </form>
         </Form>
