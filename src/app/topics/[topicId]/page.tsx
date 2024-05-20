@@ -22,29 +22,27 @@ const SingleTopic = async ({ params }: SingleTopicProps) => {
   console.log(topic);
 
   return (
-    <main>
-      <div className="grid grid-cols-3 gap-2 w-full mt-8">
-        <div className=" col-span-1">
-          <Image
-            src={topic?.image as string}
-            alt={topic?.name as string}
-            width={400}
-            height={200}
-            className="w-full h-40 object-cover rounded-md"
-          />
-        </div>
-        <div className=" col-span-2 space-y-2">
-          <h2 className=" text-3xl font-bold ">{topic?.name}</h2>
-          <p className="font-medium text-muted-foreground text-sm tracking-wider">
-            {topic?.description}
-          </p>
-          <Badge variant={"outline"}>@{topic?.creator}</Badge>
-          <Button asChild className="block w-fit">
-            <Link href={paths.CreatePost(topic?.id as string)}>
-              Create new post for this topic
-            </Link>
-          </Button>
-        </div>
+    <main className="text-center">
+      <h2 className=" text-3xl font-bold uppercase tracking-wide my-5">
+        {topic?.name}
+      </h2>
+      <Image
+        src={topic?.image as string}
+        alt={topic?.name as string}
+        width={300}
+        height={300}
+        className="w-full h-80 object-cover rounded-md"
+      />
+      <p className="font-medium text-sm tracking-wider my-5">
+        {topic?.description}
+      </p>
+      <Badge variant={"outline"}>@{topic?.creator}</Badge>
+      <div className=" flex justify-center my-5">
+        <Button asChild className="block w-fit">
+          <Link href={paths.CreatePost(topic?.id as string)}>
+            Create new post for this topic
+          </Link>
+        </Button>
       </div>
     </main>
   );

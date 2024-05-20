@@ -11,10 +11,6 @@ const links = [
     label: "FAQs",
   },
   {
-    path: "/logs",
-    label: "Change logs",
-  },
-  {
     path: "/about",
     label: "About",
   },
@@ -26,7 +22,7 @@ const Navbar = async () => {
     <nav className="w-1/2 mx-auto flex items-center py-4 border-b justify-between">
       <div className="flex items-center">
         <Link href={"/"} className="text-3xl font-bold">
-          M-BLOG
+          TeachCorner
         </Link>
         <div className="ms-6">
           {links.map((link) => (
