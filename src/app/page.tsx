@@ -1,3 +1,4 @@
+import PostList from "@/components/post/post-list";
 import TopicList from "@/components/topics/topic-list";
 import { Button } from "@/components/ui/button";
 
@@ -11,6 +12,7 @@ export default async function Home() {
       <div className=" grid grid-cols-3 gap-4 w-full">
         <div className=" col-span-2">
           <h1 className=" font-medium tracking-wide mb-2">Recent Posts</h1>
+          <PostList />
         </div>
         <div className="col-span-1">
           <h1 className=" font-medium tracking-wide mb-2">Recent Topics</h1>

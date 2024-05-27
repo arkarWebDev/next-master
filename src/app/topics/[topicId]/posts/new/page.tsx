@@ -46,10 +46,7 @@ const CreatePost = ({ params }: CreatePostProps) => {
 
   return (
     <main>
-      <CardWrapper
-        title="Create new post"
-        label={`create your own new post for ${topicId}`}
-      >
+      <CardWrapper title="Create new post" label={`create your own new post.`}>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmitHandler)}

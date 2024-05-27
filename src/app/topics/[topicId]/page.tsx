@@ -1,3 +1,4 @@
+import Post from "@/components/single-topic/post";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { db } from "@/db";
@@ -44,6 +45,7 @@ const SingleTopic = async ({ params }: SingleTopicProps) => {
           </Link>
         </Button>
       </div>
+      <Post topicId={topic?.id as string} />
     </main>
   );
 };
