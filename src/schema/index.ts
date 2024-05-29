@@ -26,10 +26,10 @@ export const RegisterSchema = z
         }
       ),
     password: z.string().min(6, {
-      message: "Password must be at least 6 characcters long.",
+      message: "Password must be at least 6 characters long.",
     }),
     confirmPassword: z.string().min(6, {
-      message: "Password must be at least 6 characcters long.",
+      message: "Password must be at least 6 characters long.",
     }),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -59,7 +59,7 @@ export const LoginSchema = z
         }
       ),
     password: z.string().min(6, {
-      message: "Password must be at least 6 characcters long.",
+      message: "Password must be at least 6 characters long.",
     }),
   })
   .refine(
@@ -82,7 +82,7 @@ export const TopicSchema = z.object({
   name: z
     .string()
     .min(3, {
-      message: "Topic name must be at least 3 characcters long.",
+      message: "Topic name must be at least 3 characters long.",
     })
     .refine((value) => !/\s/.test(value), {
       message: "Topic name must not contain spaces.",
@@ -96,16 +96,22 @@ export const TopicSchema = z.object({
         "The URL must be a link to an image file (.jpg, .jpeg, .png, .gif)",
     }),
   description: z.string().min(20, {
-    message: "Topic description must be at least 20 characcters long.",
+    message: "Topic description must be at least 20 characters long.",
   }),
 });
 
 export const PostSchema = z.object({
   title: z.string().min(3, {
-    message: "Post title must be at least 3 characcters long.",
+    message: "Post title must be at least 3 characters long.",
   }),
   content: z.string().min(20, {
-    message: "Post content must be at least 20 characcters long.",
+    message: "Post content must be at least 20 characters long.",
   }),
   topicId: z.string(),
+});
+
+export const DiscussSchema = z.object({
+  message: z.string().min(3, {
+    message: "Discuss content must be at least 3 characters long.",
+  }),
 });

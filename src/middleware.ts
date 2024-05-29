@@ -7,6 +7,7 @@ import {
   DEFAULT_HOME_REDIRECT,
   publicRoutes,
   authRoutes,
+  publicRoutePatterns,
 } from "@/routes";
 
 export default middleware((req: any): Response | undefined => {
@@ -16,7 +17,9 @@ export default middleware((req: any): Response | undefined => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
 
-  const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
+  const isPublicRoute =
+    publicRoutes.includes(nextUrl.pathname) ||
+    publicRoutePatterns.some((pattern) => pattern.test(nextUrl.pathname));
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
 
   if (isAuthRoute) {

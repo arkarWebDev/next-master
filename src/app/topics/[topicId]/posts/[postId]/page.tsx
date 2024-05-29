@@ -1,6 +1,8 @@
 import Time from "@/components/common/time";
+import CommentBox from "@/components/post/comment-box";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { db } from "@/db";
+import { auth } from "@/lib/auth";
 import paths from "@/lib/paths";
 import { Book, User } from "lucide-react";
 import Link from "next/link";
@@ -12,6 +14,7 @@ interface SinglePostProps {
 }
 const SinglePost = async ({ params }: SinglePostProps) => {
   const { postId } = params;
+  const session = await auth();
 
   const post = await db.post.findUnique({
     where: {
@@ -56,6 +59,14 @@ const SinglePost = async ({ params }: SinglePostProps) => {
           <p className=" font-medium tracking-wide">{post?.content}</p>
         </CardContent>
       </Card>
+      {session?.user && <CommentBox />}
+      {!session?.user && (
+        <Link href={"/auth/login"}>
+          <p className="text-center font-medium bg-red-600 text-white py-2 my-4 rounded-md underline tracking-wide">
+            Login or register to discuss the posts.
+          </p>
+        </Link>
+      )}
     </main>
   );
 };

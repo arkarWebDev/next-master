@@ -6,6 +6,15 @@
 export const publicRoutes = ["/", "/faq", "/about"];
 
 /**
+ * Regular expressions for dynamic public routes
+ * @type {RegExp[]}
+ */
+export const publicRoutePatterns = [
+  /^\/topics\/[^\/]+$/,
+  /^\/topics\/[^\/]+\/posts\/[^\/]+$/,
+];
+
+/**
  * Routes that are used for authentication
  * @type {string[]}
  */
