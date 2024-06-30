@@ -105,8 +105,16 @@ lesson 62 to lesson 64
 
 ## #015
 
-lesson 65 to lesson 47
+lesson 65 to lesson 67
 
 - 65 updating middleware
 - 66 discuss box
 - 67 user permission
+
+## #016
+
+lesson 68 to 70
+
+- 68 update schema
+- record to db
+- showing comments

@@ -2,12 +2,19 @@
 import * as z from "zod";
 import bcrypt from "bcryptjs";
 
-import { LoginSchema, PostSchema, RegisterSchema, TopicSchema } from "@/schema";
+import {
+  LoginSchema,
+  PostSchema,
+  RegisterSchema,
+  TopicSchema,
+  DiscussSchema,
+} from "@/schema";
 import { auth, signIn, signOut } from "./auth";
 import { db } from "@/db";
 import { redirect } from "next/navigation";
 import paths from "@/lib/paths";
 import { Post, Topic } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 
 export const handleGithubLogin = async () => {
   await signIn("github");
@@ -99,4 +106,33 @@ export const createPostHandler = async (data: z.infer<typeof PostSchema>) => {
   }
 
   redirect(paths.SinglePost(topicId, post.id));
+};
+
+export const createCommentHandler = async (
+  data: z.infer<typeof DiscussSchema>
+) => {
+  const session = await auth();
+  const validateData = await DiscussSchema.parseAsync(data);
+
+  const { message, postId, topicName } = validateData;
+
+  if (!session?.user) {
+    throw new Error("Invaild login credentials");
+  }
+
+  try {
+    await db.comment.create({
+      data: {
+        content: message,
+        userId: session.user.id as string,
+        postId,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+
+    throw new Error("Something went wrong.");
+  }
+
+  revalidatePath(paths.SinglePost(topicName, postId));
 };

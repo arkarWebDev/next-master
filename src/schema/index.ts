@@ -114,4 +114,6 @@ export const DiscussSchema = z.object({
   message: z.string().min(3, {
     message: "Discuss content must be at least 3 characters long.",
   }),
+  postId: z.string(),
+  topicName: z.string(),
 });

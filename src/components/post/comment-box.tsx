@@ -19,20 +19,29 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { DiscussSchema } from "@/schema";
 import * as z from "zod";
 import { LoaderCircle, Send } from "lucide-react";
+import { createCommentHandler } from "@/lib/action";
 
-const CommentBox = () => {
+interface CommentBoxProps {
+  postId: string;
+  topicName: string;
+}
+const CommentBox = ({ postId, topicName }: CommentBoxProps) => {
   const [loading, setLoading] = useState(false);
 
   const form = useForm({
     resolver: zodResolver(DiscussSchema),
     defaultValues: {
       message: "",
+      postId,
+      topicName,
     },
   });
 
-  const onSubmitHandler = (data: z.infer<typeof DiscussSchema>) => {
+  const onSubmitHandler = async (data: z.infer<typeof DiscussSchema>) => {
     setLoading(true);
-    console.log(data);
+    await createCommentHandler(data);
+    form.reset();
+    setLoading(false);
   };
 
   return (
