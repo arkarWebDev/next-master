@@ -1,10 +1,13 @@
 import PostList from "@/components/post/post-list";
 import TopicList from "@/components/topics/topic-list";
-import { Button } from "@/components/ui/button";
-
 import { auth } from "@/lib/auth";
 
-export default async function Home() {
+export type PageProps = {
+  params: { [key: string]: string | string[] | undefined };
+  searchParams?: { [key: string]: string | string[] | undefined };
+};
+
+export default async function Home(props: PageProps) {
   const session = await auth();
   console.log(session);
   return (
@@ -12,7 +15,7 @@ export default async function Home() {
       <div className=" grid grid-cols-3 gap-4 w-full">
         <div className=" col-span-2">
           <h1 className=" font-medium tracking-wide mb-2">Recent Posts</h1>
-          <PostList />
+          <PostList {...props} />
         </div>
         <div className="col-span-1">
           <h1 className=" font-medium tracking-wide mb-2">Recent Topics</h1>

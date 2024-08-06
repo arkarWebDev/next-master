@@ -75,6 +75,8 @@ export const createTopicHandler = async (
     throw new Error("Something went wrong.");
   }
 
+  revalidatePath("/");
+
   redirect(paths.SingleTopic(topic.id));
 };
 
@@ -105,6 +107,8 @@ export const createPostHandler = async (data: z.infer<typeof PostSchema>) => {
     throw new Error("Something went wrong.");
   }
 
+  revalidatePath("/");
+
   redirect(paths.SinglePost(topicId, post.id));
 };
 
@@ -133,6 +137,8 @@ export const createCommentHandler = async (
 
     throw new Error("Something went wrong.");
   }
+
+  revalidatePath(paths.SinglePost(topicName, postId));
 
   revalidatePath(paths.SinglePost(topicName, postId));
 };
