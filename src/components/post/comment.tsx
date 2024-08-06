@@ -8,16 +8,13 @@ interface CommentProps {
   content: string;
   likeCount: number;
 }
-const Comment = ({ username, date, content, likeCount }: CommentProps) => {
+const Comment = ({ username, date, content }: CommentProps) => {
   return (
     <Card className=" mb-4">
       <CardHeader>
         <p className=" font-bold">@{username}</p>
         <Time date={date} />
         <p className=" border p-2">{content}</p>
-        <p className=" flex items-center gap-1 justify-end my-2">
-          <ThumbsUp /> {likeCount}
-        </p>
       </CardHeader>
     </Card>
   );
